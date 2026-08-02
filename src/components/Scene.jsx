@@ -4,19 +4,22 @@ import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import House from './House'
 import Rooms from './Rooms'
 import Lighting from './Lighting'
+import { LAYOUT_X_SCALE } from '../constants'
 
 /* ═══════════════════════════════════════════
    SCENE SETUP
    Camera, controls, post-processing, composition
    ═══════════════════════════════════════════ */
 
+const CAMERA_X = LAYOUT_X_SCALE < 0 ? 12 : -12
+
 export default function Scene() {
   return (
     <>
-      {/* Isometric orthographic camera from front-left-top */}
+      {/* View from the open side of the dollhouse layout. */}
       <OrthographicCamera
         makeDefault
-        position={[-12, 13, 14]}
+        position={[CAMERA_X, 13, 14]}
         zoom={56}
         near={0.1}
         far={100}
@@ -48,10 +51,16 @@ export default function Scene() {
         color="#3A2A1A"
       />
 
-      {/* House structure */}
+      {/*
+        House.jsx and Rooms.jsx retain the original measured source coordinates.
+        The X-axis transform makes the current physical layout explicit:
+        bedroom/bathroom wing on the right, living/carport wing on the left.
+      */}
       <Suspense fallback={null}>
-        <House />
-        <Rooms />
+        <group scale={[LAYOUT_X_SCALE, 1, 1]}>
+          <House />
+          <Rooms />
+        </group>
       </Suspense>
 
       {/* Post-processing for premium look */}
