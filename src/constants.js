@@ -7,8 +7,16 @@ export const FLOOR_Y = 0
 export const HALF_W = 3    // half width (x: -3 to 3)
 export const HALF_D = 5    // half depth (z: -5 to 5)
 
-// Room z-boundaries (back = -5, front = 5)
-// Left side (x: -3 to 0)
+// The source geometry was originally authored with the bedroom wing on the left.
+// Mirror the complete model on the X axis so the current real-world layout has
+// Bedroom 1, Bedroom 2, the bathroom, and the front garden on the right.
+// Set to 1 only when viewing the original, unmirrored source orientation.
+export const LAYOUT_X_SCALE = -1
+export const BEDROOM_WING_SIDE = LAYOUT_X_SCALE < 0 ? 'right' : 'left'
+
+// Room z-boundaries (back = -5, front = 5).
+// These are source-coordinate boundaries before LAYOUT_X_SCALE is applied.
+// Bedroom wing source side (x: -3 to 0; displayed on the right when mirrored)
 export const BR2_BACK = -5
 export const BR2_FRONT = -2.5
 export const BATH_BACK = -2.5
@@ -18,7 +26,7 @@ export const BR1_FRONT = 1.5
 export const GARDEN_BACK = 1.5
 export const GARDEN_FRONT = 5.0
 
-// Right side (x: 0 to 3)
+// Living/service wing source side (x: 0 to 3; displayed on the left when mirrored)
 export const REAR_BACK = -5
 export const REAR_FRONT = -2.5
 export const FAMILY_BACK = -2.5
@@ -28,7 +36,7 @@ export const TERRACE_FRONT = 1.5
 export const CARPORT_BACK = 1.5
 export const CARPORT_FRONT = 4.93
 
-// Bathroom width (not full 3m, only ~1.3m from left wall)
+// Bathroom width (not full 3m, only ~1.3m along the exterior side)
 export const BATH_WIDTH = 1.3
 
 // Warm cozy color palette
