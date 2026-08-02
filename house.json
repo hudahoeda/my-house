@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "my-house",
+    "units": "mm",
+    "coordinate_system": {
+      "x": "left-to-right when viewed from the street",
+      "y": "front-to-back, with y=0 at the street",
+      "z": "up"
+    }
+  },
+  "lot": {
+    "width": 6000,
+    "depth": 10000
+  },
+  "defaults": {
+    "wall_height": 2800,
+    "exterior_wall_thickness": 150,
+    "interior_wall_thickness": 120,
+    "floor_thickness": 80,
+    "door_height": 2100
+  },
+  "spaces": [
+    {"id": "carport", "kind": "exterior", "x": 0, "y": 70, "width": 3000, "depth": 3430, "level": -140},
+    {"id": "front_terrace", "kind": "exterior", "x": 0, "y": 3500, "width": 3000, "depth": 850, "level": -20},
+    {"id": "family_room", "kind": "interior", "x": 0, "y": 4350, "width": 3000, "depth": 3150, "level": 0},
+    {"id": "rear_yard", "kind": "exterior", "x": 0, "y": 7500, "width": 3000, "depth": 2500, "level": -80},
+    {"id": "front_garden", "kind": "garden", "x": 3000, "y": 0, "width": 3000, "depth": 3500, "level": -20},
+    {"id": "bedroom_1", "kind": "interior", "x": 3000, "y": 3500, "width": 3000, "depth": 2500, "level": 0},
+    {"id": "corridor", "kind": "interior", "x": 3000, "y": 6000, "width": 1700, "depth": 1500, "level": 0},
+    {"id": "bathroom", "kind": "wet", "x": 4700, "y": 6000, "width": 1300, "depth": 1500, "level": -50},
+    {"id": "bedroom_2", "kind": "interior", "x": 3000, "y": 7500, "width": 3000, "depth": 2500, "level": 0}
+  ],
+  "walls": [
+    {"id": "family_left", "kind": "exterior", "start": [0, 4350], "end": [0, 7500]},
+    {"id": "family_front", "kind": "exterior", "start": [0, 4350], "end": [3000, 4350]},
+    {"id": "family_rear", "kind": "exterior", "start": [0, 7500], "end": [3000, 7500]},
+    {"id": "bedroom_wing_front", "kind": "exterior", "start": [3000, 3500], "end": [6000, 3500]},
+    {"id": "bedroom_wing_right", "kind": "exterior", "start": [6000, 3500], "end": [6000, 10000]},
+    {"id": "bedroom_wing_rear", "kind": "exterior", "start": [6000, 10000], "end": [3000, 10000]},
+    {"id": "center_divider", "kind": "interior", "start": [3000, 3500], "end": [3000, 10000]},
+    {"id": "bedroom_1_back", "kind": "interior", "start": [3000, 6000], "end": [6000, 6000]},
+    {"id": "bedroom_2_front", "kind": "interior", "start": [3000, 7500], "end": [6000, 7500]},
+    {"id": "bathroom_side", "kind": "interior", "start": [4700, 6000], "end": [4700, 7500]}
+  ],
+  "openings": [
+    {"id": "family_front_door", "wall_id": "family_front", "kind": "door", "offset": 1050, "width": 900, "height": 2100, "sill": 0},
+    {"id": "family_rear_door", "wall_id": "family_rear", "kind": "door", "offset": 1050, "width": 900, "height": 2100, "sill": 0},
+    {"id": "bedroom_1_garden_door", "wall_id": "bedroom_wing_front", "kind": "door", "offset": 450, "width": 900, "height": 2100, "sill": 0},
+    {"id": "bedroom_1_door", "wall_id": "center_divider", "kind": "door", "offset": 700, "width": 800, "height": 2100, "sill": 0},
+    {"id": "corridor_family_opening", "wall_id": "center_divider", "kind": "door", "offset": 2700, "width": 900, "height": 2100, "sill": 0},
+    {"id": "bedroom_2_door", "wall_id": "center_divider", "kind": "door", "offset": 4650, "width": 800, "height": 2100, "sill": 0},
+    {"id": "bathroom_door", "wall_id": "bathroom_side", "kind": "door", "offset": 400, "width": 700, "height": 2100, "sill": 0},
+    {"id": "bedroom_1_window", "wall_id": "bedroom_wing_right", "kind": "window", "offset": 650, "width": 1200, "height": 1100, "sill": 900},
+    {"id": "bathroom_window", "wall_id": "bedroom_wing_right", "kind": "window", "offset": 3000, "width": 600, "height": 500, "sill": 1600},
+    {"id": "bedroom_2_window", "wall_id": "bedroom_wing_right", "kind": "window", "offset": 4750, "width": 1200, "height": 1100, "sill": 900},
+    {"id": "family_window", "wall_id": "family_left", "kind": "window", "offset": 900, "width": 1200, "height": 1100, "sill": 900}
+  ],
+  "furniture": [
+    {"id": "bedroom_1_bed", "kind": "bed", "space_id": "bedroom_1", "x": 3300, "y": 3850, "width": 1600, "depth": 2000, "height": 550, "rotation": 0},
+    {"id": "bedroom_2_bed", "kind": "bed", "space_id": "bedroom_2", "x": 3350, "y": 7800, "width": 1000, "depth": 2000, "height": 500, "rotation": 0},
+    {"id": "family_sofa", "kind": "sofa", "space_id": "family_room", "x": 250, "y": 5050, "width": 850, "depth": 1800, "height": 800, "rotation": 90},
+    {"id": "family_table", "kind": "table", "space_id": "family_room", "x": 1350, "y": 5350, "width": 800, "depth": 1200, "height": 750, "rotation": 0}
+  ]
+}
