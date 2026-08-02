@@ -1,1 +1,11 @@
 node_modules
+
+# Generated FreeCAD/CAD outputs
+build/
+*.FCStd1
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
