@@ -1,0 +1,4 @@
+interface:
+  display_name: "FreeCAD House Model"
+  short_description: "Edit, validate, and build the house model"
+  default_prompt: "Use $freecad-house-model to modify and validate the declarative house model."

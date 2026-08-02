@@ -1,18 +1,20 @@
-PYTHON ?= python3
 FREECADCMD ?= FreeCADCmd
+HOUSE_CONFIG ?= house.json
+BUILD_DIR ?= build
 
 .PHONY: validate test check build clean
 
 validate:
-	$(PYTHON) scripts/validate_house.py house.json
+	./housectl validate --config "$(HOUSE_CONFIG)"
 
 test:
-	$(PYTHON) -m unittest discover -s tests -v
+	./housectl test
 
-check: validate test
+check:
+	FREECADCMD="$(FREECADCMD)" ./housectl check --config "$(HOUSE_CONFIG)" --build-dir "$(BUILD_DIR)"
 
-build: check
-	$(FREECADCMD) scripts/build_house.py -- house.json build
+build:
+	FREECADCMD="$(FREECADCMD)" ./housectl build --config "$(HOUSE_CONFIG)" --build-dir "$(BUILD_DIR)"
 
 clean:
-	rm -rf build __pycache__ scripts/__pycache__ tests/__pycache__
+	./housectl clean --build-dir "$(BUILD_DIR)"

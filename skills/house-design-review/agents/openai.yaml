@@ -1,0 +1,4 @@
+interface:
+  display_name: "House Design Review"
+  short_description: "Review layout, clearances, and geometry changes"
+  default_prompt: "Use $house-design-review to review the current house model without modifying it."

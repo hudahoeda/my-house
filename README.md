@@ -1,6 +1,6 @@
 # My House — code-first FreeCAD model
 
-This repository models a 6 m × 10 m house from declarative data. The primary workflow is now programmatic: edit `house.json`, validate it with Python, and generate an inspectable FreeCAD model with `FreeCADCmd`.
+This repository models a 6 m × 10 m house from declarative data. The primary workflow is now programmatic: edit `house.json`, use the dependency-free `housectl` CLI to validate it, and generate an inspectable FreeCAD model with `FreeCADCmd`.
 
 The existing React/Vite viewer remains in the repository as a legacy visual reference. It is no longer intended to be the canonical geometry source.
 
@@ -22,10 +22,13 @@ The coordinate system is:
 
 ```text
 house.json                 Canonical dimensions and objects
+housectl                   Project CLI for validation, inspection, diffs, and builds
 scripts/house_config.py    Shared validation helpers
 scripts/validate_house.py  Validation without FreeCAD
+scripts/house_cli.py       Implementation of housectl
 scripts/build_house.py     Headless FreeCAD generator
 tests/                     Dimensional and orientation checks
+skills/                    Repository-local Codex modeling and review skills
 build/                     Generated FCStd and STEP files, ignored by Git
 src/                       Legacy React Three Fiber viewer
 ```
@@ -33,8 +36,26 @@ src/                       Legacy React Three Fiber viewer
 ## Validate without FreeCAD
 
 ```bash
+./housectl check --no-freecad
+```
+
+The Makefile remains a compatibility wrapper around the same CLI:
+
+```bash
 make check
 ```
+
+Useful inspection and review commands:
+
+```bash
+./housectl summary
+./housectl inspect bedroom_1
+./housectl diff main
+```
+
+`housectl check` runs configuration, orientation, geometry/clearance, and
+Python tests, then generates FreeCAD outputs when `FreeCADCmd` is available.
+Use `--no-freecad` in environments without FreeCAD.
 
 This uses only the Python standard library.
 
@@ -60,6 +81,11 @@ build/house.step
 ```
 
 Open `build/house.FCStd` in FreeCAD for inspection and manual measurements. The STEP file is provided for interchange with other CAD and rendering tools.
+
+The project-local Codex skills are:
+
+- `skills/freecad-house-model`: edit, validate, inspect, and build the model.
+- `skills/house-design-review`: review layout and clearances without changing files.
 
 ## Give Codex a house change
 
